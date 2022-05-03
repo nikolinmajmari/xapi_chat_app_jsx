@@ -14,4 +14,4 @@ export { config } from "https://deno.land/x/dotenv/mod.ts";
 
 export {InMemorySessionAdapter} from "https://raw.githubusercontent.com/nikolinmajmari/xapi/main/xapi/session/adapter.ts";
 
-export { renderSSR } from "https://deno.land/x/nano_jsx@v0.0.20/mod.ts";
+export {h, renderSSR } from "https://deno.land/x/nano_jsx@v0.0.20/mod.ts";

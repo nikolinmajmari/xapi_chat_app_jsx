@@ -1,5 +1,5 @@
 import {db} from "../services/firebase.js";
-import {renderSSR, Router} from "../deps.ts";
+import {h,renderSSR, Router} from "../deps.ts";
 import User from "../models/user.ts";
 import appAuth from "../config/auth.ts";
 import Login from "../jsx/login.tsx";
