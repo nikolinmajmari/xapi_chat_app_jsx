@@ -7,7 +7,7 @@ import SignUp from "../jsx/signup.tsx";
 const router = new Router();
 
 router.get("/login",async (ctx,next)=>{
-    const html = renderSSR(<Login/>);
+    const html = renderSSR(Login());
     await ctx.res.html(html);
 });
 
@@ -29,7 +29,7 @@ router.post("/login",async (ctx,next)=>{
 });
 
 router.get("/signup",async (ctx,next)=>{
-    const html = renderSSR(<SignUp/>);
+    const html = renderSSR(SignUp());
     await ctx.res.html(html);
 });
 
