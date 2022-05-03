@@ -1,5 +1,5 @@
 import {db} from "../services/firebase.js";
-import {h,renderSSR, Router} from "../deps.ts";
+import {Router,ReactDOMServer,h} from "../deps.ts";
 import User from "../models/user.ts";
 import appAuth from "../config/auth.ts";
 import Login from "../jsx/login.tsx";
@@ -7,8 +7,8 @@ import SignUp from "../jsx/signup.tsx";
 const router = new Router();
 
 router.get("/login",async (ctx,next)=>{
-    const html = renderSSR(Login());
-    await ctx.res.html(html);
+    const html = ReactDOMServer.renderToString(Login());
+    await ctx.res.contentTypeTextHtml().setBody(html).sent();
 });
 
 router.post("/login",async (ctx,next)=>{
@@ -29,7 +29,7 @@ router.post("/login",async (ctx,next)=>{
 });
 
 router.get("/signup",async (ctx,next)=>{
-    const html = renderSSR(SignUp());
+    const html =ReactDOMServer.renderToString(SignUp()) ;
     await ctx.res.html(html);
 });
 

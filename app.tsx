@@ -34,9 +34,9 @@ app.use(appAuth.authMiddleware());
 //// start routes here 
 
 
-import homeRouter from "./routes/home.ts";
+import homeRouter from "./routes/home.tsx";
 import authRouter from "./routes/auth.tsx";
-import chatRouter from "./routes/chat.ts";
+import chatRouter from "./routes/chat.tsx";
 app.use(authRouter);
 /// authenticated routes 
 app.use(appAuth.ensureAuthenticated());

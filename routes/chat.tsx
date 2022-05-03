@@ -1,10 +1,12 @@
-import {Router} from "../deps.ts";
 import Chat,{ChatUser} from "../models/chat.ts";
 import {db} from "../services/firebase.js";
 import appAuth from "../config/auth.ts";
 import User from "../models/user.ts";
 import Message from "../models/message.ts";
-
+import {Router,ReactDOMServer,h} from "../deps.ts";
+import Chats from "../jsx/chat/chats.tsx";
+import Search from "../jsx/chat/search.tsx";
+import Messages from "../jsx/chat/messages.tsx";
 const router = new Router();
 /**
  * get chats of a user 
@@ -13,7 +15,8 @@ router.get("/",async (ctx,next)=>{
     try{
         const user = appAuth.of(ctx)?.getUser()!;
         const chats = await Chat.getUserChats(user);
-        return await ctx.res.render("./chat/chats.eta",{chats:chats});
+        const html = ReactDOMServer.renderToString(Chats({user:user,chats:chats}));
+        return await ctx.res.html(html);
     }catch(e){
         console.log(e);
         return await ctx.res.ineralServerError();
@@ -40,10 +43,12 @@ router.get("/search",async (ctx,next)=>{
     const contacts = otherUsers.filter(o=>contactsId.includes(o.id!));
     console.log("filtered contacts "+(Date.now()- stamp));
     stamp = Date.now();
-    await ctx.res.render("./chat/search.eta",{
-        contacts:contacts,
-        nonContacts:nonContacts
-    });
+    const html = await ReactDOMServer.renderToString(
+        Search({
+            contacts,nonContacts
+        })
+    );
+    await ctx.res.html(html);
    }catch(e){
        console.log(e);
        return await ctx.res.ineralServerError();
@@ -119,10 +124,8 @@ router.get("/:id",async (ctx,next)=>{
     try{
         const chat:Chat = ctx.attribs.chat;
         const messages:Message[] = await Message.get<Message>(db.where("chat","==",chat.id));
-        await ctx.res.render("./chat/messages.eta",{
-            chat:chat,
-            messages:messages
-        });
+        const html = ReactDOMServer.renderToString(Messages({messages:messages}));
+        await ctx.res.html(html);
     }catch(e){
         console.log(e);
         ctx.res.ineralServerError();
