@@ -1,5 +1,6 @@
-import Base from "./templates/base.tsx";
 
+import {h} from "../deps.ts";
+import Base from "./templates/base.tsx";
 export default function SignUp(){
     return (<Base>
          <div class="form-container container">

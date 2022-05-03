@@ -1,3 +1,5 @@
+
+import {h} from "../deps.ts";
 import Base from "./templates/base.tsx";
 
 export default function Login(){

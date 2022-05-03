@@ -1,3 +1,5 @@
+
+import {h} from "../../deps.ts";
 export default function Base(props){
     return (<html>
                 <head>
