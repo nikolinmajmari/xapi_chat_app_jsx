@@ -108,7 +108,6 @@ router.get("/invite/:user",async(ctx,next)=>{
     }
 });
 
-
 router.use("/:id",async (ctx,next)=>{
     try{
         const chat = await Chat.find<Chat>(ctx.req.params.id as string);
