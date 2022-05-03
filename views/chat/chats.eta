@@ -1,0 +1,23 @@
+<% layout("./layouts/auth_base.eta")%>
+
+
+
+<div class="container-fluid">
+
+<div class="users-container p-4">
+    <h4 class="mb-4"> Invite to Chat</h4>
+    <% it.chats.forEach(function(chat){ %>
+    <div class="card card-body m-2">
+      <% var other = chat.getOtherUser(it.ctx.user) %>
+        <div class="d-flex flex-row">
+            <div class="flex-column d-flex" style="flex:1">
+                <h5 class="text-lg"><%= other?.firstName %>  <%= other?.lastName%></h5>
+                <br/>
+            </div>
+             <div class="flex-column d-flex">
+              <a class="btn btn-primary chat-open" href="/chat/<%=chat.id%>">Chat</a>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>

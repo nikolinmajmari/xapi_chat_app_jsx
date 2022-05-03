@@ -1,0 +1,42 @@
+<% layout("./layouts/auth_base.eta")%>
+
+<div class="container-fluid">
+
+<div class="users-container p-4">
+    <h4 class="mb-4"> Invite to Chat</h4>
+    <% it.nonContacts.forEach(function(user){ %>
+    <div class="card card-body m-2">
+        <div class="d-flex flex-row">
+            <div class="flex-column d-flex" style="flex:1">
+                <h5 class="text-lg"><%=user.username%></h5>
+                <br/>
+                <label class="text-lg"><%=user.firstName%> <%=user.lastName%></label>
+            </div>
+            <div class="flex-column d-flex">
+               <form action="/chat/invite/<%= user.id%>" method="post">
+                    <button class="btn btn-primary">Invite</button>
+               </form>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+<div class="users-container p-4">
+    <h4 class="mb-4">Already Invited </h4>
+    <% it.contacts.forEach(function(user){ %>
+    <div class="card card-body m-2">
+        <div class="d-flex flex-row">
+            <div class="flex-column d-flex" style="flex:1">
+                <h5 class="text-lg"><%=user.email%></h5>
+                <br/>
+                <label class="text-lg"><%=user.firstName%> <%=user.lastName%></label>
+            </div>
+            <div class="flex-column d-flex">
+                <button class="btn btn-primary">Chat</button>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
+</div>

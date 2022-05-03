@@ -1,0 +1,23 @@
+<% layout("./layouts/auth_base.eta")%>
+
+<div class="container d-flex flex-column" style="flex:1" >
+    <div class="d-flex flex-column" style="flex:1;overflow-y:scroll;background-color:white">
+
+        <% it.messages.forEach(function(message){ %>
+            <div class="card card-body m-2">
+                <div class="d-flex flex-row">
+                    <div class="flex-column d-flex" style="flex:1">
+                        <label class="text-lg"><%=message.text%></label>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+    </div>
+    <div class="d-flex flex-row">
+      <form method="post" class="d-flex flex-row" style="flex:1">
+          <input type="text" name="message" class="form-control" style="flex:1"/>
+          <button type="submit" class="btn btn-primary">Sent</button>
+      </form>
+    </div>
+</div>
